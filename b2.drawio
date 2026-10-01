@@ -1,0 +1,79 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Trang-1" id="BTwA1ljMrYj3i4eeDfVq">
+    <mxGraphModel dx="1873" dy="1105" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" value="Nguy cơ kỹ thuật: Presentation gọi thẳng SQL làm vi phạm phân tầng, tăng phụ thuộc vào CSDL, bỏ qua kiểm tra nghiệp vụ và gây rủi ro bảo mật, khó bảo trì." vertex="1">
+          <mxGeometry height="70" width="1080" x="160" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;" value="&lt;b&gt;Đặc tả cốt lõi&lt;/b&gt;&lt;br&gt;&lt;b&gt;Actor:&lt;/b&gt; Shipper&lt;br&gt;&lt;b&gt;Pre-condition:&lt;/b&gt; Bưu kiện hợp lệ đã được phân công; Shipper đã đăng nhập; có GPS; trạng thái cho phép giao; COD được xác định.&lt;br&gt;&lt;b&gt;Main Flow:&lt;/b&gt; Chọn đơn → xác nhận giao → kiểm tra GPS và COD → lưu DELIVERED → hiển thị thành công.&lt;br&gt;&lt;b&gt;Post-condition:&lt;/b&gt; Trạng thái đơn là DELIVERED, dữ liệu COD và ảnh xác nhận được lưu." vertex="1">
+          <mxGeometry height="145" width="1080" x="160" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-4" parent="1" style="swimlane;startSize=28;horizontal=1;fillColor=#f5f5f5;strokeColor=#999999;html=1;fontStyle=1;" value="UC-DELIVERY-01 — Sequence Diagram" vertex="1">
+          <mxGeometry height="690" width="1360" x="20" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-5" parent="xm_hvOK5RYceVDbXIUzA-4" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=16;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" value="Shipper" vertex="1">
+          <mxGeometry height="570" width="150" x="70" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-6" parent="xm_hvOK5RYceVDbXIUzA-4" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=16;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" value="ShipperApp&#xa;(Presentation)" vertex="1">
+          <mxGeometry height="570" width="170" x="300" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-7" parent="xm_hvOK5RYceVDbXIUzA-4" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=16;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" value="DeliveryController /&#xa;DeliveryService&#xa;(Business Logic)" vertex="1">
+          <mxGeometry height="570" width="210" x="590" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-8" parent="xm_hvOK5RYceVDbXIUzA-4" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=16;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" value="PackageRepository&#xa;(Data)" vertex="1">
+          <mxGeometry height="570" width="180" x="930" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-9" parent="xm_hvOK5RYceVDbXIUzA-4" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=16;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" value="Package_Table" vertex="1">
+          <mxGeometry height="570" width="150" x="1210" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-10" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-6" value="1. Chọn đơn #RK-8899, xác nhận đã giao">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-11" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-7" value="2. POST /deliveries/confirm + DeliveryDTO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-12" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-7" value="3. Kiểm tra GPS, trạng thái, tính COD">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-13" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-6" value="4. Nếu COD &gt; 0: yêu cầu số tiền thu + ảnh xác nhận">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-14" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-8" value="5. updateDeliveryStatus(DELIVERED, COD, proof)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-15" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-9" value="6. UPDATE trạng thái qua Repository">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-16" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-8" value="7. Kết quả lưu thành công">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-17" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-6" value="8. DeliveryResult: thành công">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-18" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-5" value="9. Hiển thị: Cập nhật thành công">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-19" parent="xm_hvOK5RYceVDbXIUzA-4" style="rounded=1;whiteSpace=wrap;html=1;fontStyle=1;" value="ALT — Khách vắng nhà / từ chối nhận (FAILED_ATTEMPT_1)" vertex="1">
+          <mxGeometry height="190" width="1280" x="35" y="385" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-20" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-6" value="A1. Shipper báo giao thất bại + nhập lý do">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-21" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-7" value="A2. POST failed-attempt + reason">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-22" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-8" value="A3. Ghi FAILED_ATTEMPT_1 và tự lập lịch giao lại lần 2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-23" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-6" value="A4. Lưu lý do + lịch giao lại; trả kết quả thất bại có lịch mới">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xm_hvOK5RYceVDbXIUzA-24" edge="1" parent="xm_hvOK5RYceVDbXIUzA-4" source="xm_hvOK5RYceVDbXIUzA-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;endArrow=classic;" target="xm_hvOK5RYceVDbXIUzA-5" value="A5. Hiển thị: Giao thất bại — đã lên lịch giao lại lần 2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
